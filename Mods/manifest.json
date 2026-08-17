@@ -1,0 +1,9 @@
+{
+    "name": "HealthRegenToggle",
+    "version_number": "1.1.0",
+    "website_url": "https://github.com/MJorink/HealthRegenToggle",
+    "description": "A BoneLab mod that allows you to toggle automatic health regeneration.",
+    "dependencies": [
+        "bonelib-BoneLib-3.2.2"
+    ]
+}
