@@ -38,14 +38,14 @@ namespace HealthRegenToggle {
         private void SetupBoneMenu() {
             Page defaultPage = Page.Root.CreatePage("Jorink", Color.red).CreatePage("HealthRegenToggle", Color.green);
 
-            defaultPage.CreateBool("Enable Health Regen", Color.blue, regenEntry.Value, (value) => { regenEntry.Value = value; });
+            defaultPage.CreateBool("Health Regeneration", Color.blue, regenEntry.Value, (value) => { regenEntry.Value = value; });
 
             defaultPage.CreateFunction("Save Settings", Color.cyan, () => MelonPreferences.Save());
         }
 
         private void SetupMelonPreferences() {
             var category = MelonPreferences.CreateCategory("HealthRegenToggle");
-            regenEntry = category.CreateEntry("Health Regen", true);
+            regenEntry = category.CreateEntry("Health Regeneration", true);
 
             MelonPreferences.Save();
         }
