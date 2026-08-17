@@ -11,9 +11,7 @@ namespace HealthRegenToggle {
     public class Core : MelonMod {
 
         private Player_Health playerHealth;
-
-        MelonPreferences_Category category;
-        MelonPreferences_Entry<bool> RegenEntry;
+        MelonPreferences_Entry<bool> regenEntry;
 
         public override void OnInitializeMelon() {
             SetupMelonPreferences();
@@ -21,7 +19,7 @@ namespace HealthRegenToggle {
         }
 
         public override void OnUpdate() {
-            if (RegenEntry == null || RegenEntry.Value) return;
+            if (regenEntry.Value) return;
 
             if (playerHealth == null) {
                 playerHealth = UnityEngine.Object.FindObjectOfType<Player_Health>();
@@ -40,18 +38,16 @@ namespace HealthRegenToggle {
         private void SetupBoneMenu() {
             Page defaultPage = Page.Root.CreatePage("Jorink", Color.red).CreatePage("HealthRegenToggle", Color.green);
 
-            defaultPage.CreateBool("Enable Health Regen", Color.blue, RegenEntry.Value, (a) => { RegenEntry.Value = a; });
+            defaultPage.CreateBool("Enable Health Regen", Color.blue, regenEntry.Value, (value) => { regenEntry.Value = value; });
 
-            defaultPage.CreateFunction("Save Settings", Color.cyan, () => { MelonPreferences.Save(); });
+            defaultPage.CreateFunction("Save Settings", Color.cyan, () => MelonPreferences.Save());
         }
 
         private void SetupMelonPreferences() {
-            category = MelonPreferences.CreateCategory("HealthRegenToggle");
-
-            RegenEntry = category.CreateEntry("Health Regen", true);
+            var category = MelonPreferences.CreateCategory("HealthRegenToggle");
+            regenEntry = category.CreateEntry("Health Regen", true);
 
             MelonPreferences.Save();
-            category.SaveToFile();
         }
     }
 }
