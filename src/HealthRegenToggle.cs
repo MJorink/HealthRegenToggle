@@ -46,8 +46,8 @@ namespace HealthRegenToggle {
         private void SetupMelonPreferences() {
             var category = MelonPreferences.CreateCategory("HealthRegenToggle");
             regenEntry = category.CreateEntry("Health Regeneration", true);
-
             MelonPreferences.Save();
+            category.SaveToFile();
         }
     }
 }
