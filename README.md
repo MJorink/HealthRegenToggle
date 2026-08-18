@@ -1,5 +1,5 @@
 # HealthRegenToggle
-A BoneLab mod that allows you to toggle automatic health regeneration.
+A BoneLab mod that allows you to toggle health regeneration.
 
 Last tested on:
 - Melonloader: 0.7.3
