@@ -7,5 +7,5 @@ Last tested on:
 - BoneLab: `Patch 6`
 
 ## Discord Server
-Join the Discord server to chat, give suggestions, report issues, and get sneak peeks!
+Join the Discord server to chat, give suggestions, report issues, and get sneak peeks! <br>
 https://discord.gg/Tu7Pnq4RV7
