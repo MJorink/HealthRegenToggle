@@ -4,7 +4,7 @@ using BoneLib.BoneMenu;
 using Il2CppSLZ.Marrow;
 using UnityEngine;
 
-[assembly: MelonInfo(typeof(HealthRegenToggle.Core), "HealthRegenToggle", "1.1.1", "jorink")]
+[assembly: MelonInfo(typeof(HealthRegenToggle.Core), "HealthRegenToggle", "1.1.2", "jorink")]
 [assembly: MelonGame("Stress Level Zero", "BONELAB")]
 
 namespace HealthRegenToggle {
