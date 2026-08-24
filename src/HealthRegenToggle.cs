@@ -4,50 +4,66 @@ using BoneLib.BoneMenu;
 using Il2CppSLZ.Marrow;
 using UnityEngine;
 
-[assembly: MelonInfo(typeof(HealthRegenToggle.Core), "HealthRegenToggle", "1.1.2", "jorink")]
+[assembly: MelonInfo(typeof(HealthRegenToggle.Core), "HealthRegenToggle", "1.2.0", "jorink")]
 [assembly: MelonGame("Stress Level Zero", "BONELAB")]
 
-namespace HealthRegenToggle {
-    public class Core : MelonMod {
+namespace HealthRegenToggle
+{
+    public class Core : MelonMod
+    {
+    	private static MelonPreferences_Entry<bool> regenEntry;
 
-        private Player_Health playerHealth;
-        MelonPreferences_Entry<bool> regenEntry;
+        private static Player_Health playerHealth;
+        private static RigManager rig;
+        private static Coroutine regenRoutine;
 
         public override void OnInitializeMelon() {
             SetupMelonPreferences();
             SetupBoneMenu();
+            SetupHooks();
         }
 
-        public override void OnUpdate() {
-            if (regenEntry.Value) return;
-
-            if (playerHealth == null) {
-                playerHealth = UnityEngine.Object.FindObjectOfType<Player_Health>();
-                if (playerHealth == null) return;
-            }
-
-            if (!playerHealth.regenerating) return;
-
-            var routine = playerHealth.regenRoutine;
-            if (routine != null)
-                playerHealth.StopCoroutine(routine);
-
-            playerHealth.regenerating = false;
+        private void SetupMelonPreferences() {
+            var category = MelonPreferences.CreateCategory("HealthRegenToggle");
+            
+            regenEntry = category.CreateEntry("Health Regeneration", true);
+            
+            MelonPreferences.Save();
+            category.SaveToFile();
         }
 
         private void SetupBoneMenu() {
             Page defaultPage = Page.Root.CreatePage("Jorink", Color.red).CreatePage("HealthRegenToggle", Color.green);
 
             defaultPage.CreateBool("Health Regeneration", Color.blue, regenEntry.Value, (value) => { regenEntry.Value = value; });
-
             defaultPage.CreateFunction("Save Settings", Color.cyan, () => MelonPreferences.Save());
         }
 
-        private void SetupMelonPreferences() {
-            var category = MelonPreferences.CreateCategory("HealthRegenToggle");
-            regenEntry = category.CreateEntry("Health Regeneration", true);
-            MelonPreferences.Save();
-            category.SaveToFile();
+        private static void SetupHooks()
+        {
+        	Hooking.OnLevelLoaded += OnLevelLoaded;
+        }
+
+        private static void OnLevelLoaded(LevelInfo levelInfo)
+        {
+        	rig = Player.RigManager;
+        	playerHealth = rig.health.TryCast<Player_Health>();
+        	regenRoutine = playerHealth.regenRoutine;
+        }
+
+        private static bool IsModAllowed()
+        {
+        	if (!rig || !playerHealth) return false;
+        	
+        	if (!regenEntry.Value && playerHealth.regenerating && regenRoutine != null) return true;
+        	return false;
+        }
+
+        public override void OnUpdate()
+        {
+        	if (!IsModAllowed()) return;
+        	playerHealth.StopCoroutine(regenRoutine);
+        	playerHealth.regenerating = false;
         }
     }
 }
