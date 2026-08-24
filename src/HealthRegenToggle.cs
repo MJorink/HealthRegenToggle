@@ -17,13 +17,15 @@ namespace HealthRegenToggle
         private static RigManager rig;
         private static Coroutine regenRoutine;
 
-        public override void OnInitializeMelon() {
+        public override void OnInitializeMelon()
+        {
             SetupMelonPreferences();
             SetupBoneMenu();
             SetupHooks();
         }
 
-        private void SetupMelonPreferences() {
+        private void SetupMelonPreferences()
+        {
             var category = MelonPreferences.CreateCategory("HealthRegenToggle");
             
             regenEntry = category.CreateEntry("Health Regeneration", true);
@@ -32,7 +34,8 @@ namespace HealthRegenToggle
             category.SaveToFile();
         }
 
-        private void SetupBoneMenu() {
+        private void SetupBoneMenu()
+        {
             Page defaultPage = Page.Root.CreatePage("Jorink", Color.red).CreatePage("HealthRegenToggle", Color.green);
 
             defaultPage.CreateBool("Health Regeneration", Color.blue, regenEntry.Value, (value) => { regenEntry.Value = value; });
