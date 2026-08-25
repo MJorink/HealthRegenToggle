@@ -1,15 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<GenerateAssemblyInfo>False</GenerateAssemblyInfo>
-		<Nullable>disable</Nullable>
-		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-		<EnableDefaultCompileItems>false</EnableDefaultCompileItems>
-		<AssemblyTitle>HealthRegenToggle</AssemblyTitle>
-		<Product>HealthRegenToggle</Product>
-	</PropertyGroup>
-
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AssemblyTitle>HealthRegenToggle</AssemblyTitle>
+    <Product>HealthRegenToggle</Product>
+  </PropertyGroup>
 	<ItemGroup>
 		<Reference Include="BoneLib">
 		  <HintPath>$(HOME)/repos/BL-Libs/Mods/BoneLib.dll</HintPath>
@@ -33,12 +29,7 @@
 		  <HintPath>$(HOME)/repos/BL-Libs/PC/MelonLoader/net6/Il2CppInterop.Runtime.dll</HintPath>
 		</Reference>
 	</ItemGroup>
-
-	<ItemGroup>
-		<Compile Include="HealthRegenToggle.cs"/>
-	</ItemGroup>
-
-	<Target Name="CopyOutput" AfterTargets="Build" Condition="'$(HOME)/repos/HealthRegenToggle/docs/Mods' != ''">
-		<Copy SourceFiles="$(TargetPath)" DestinationFolder="$(HOME)/repos/HealthRegenToggle/docs/Mods"/>
+	<Target Name="CopyOutput" AfterTargets="Build" Condition="'$(HOME)/repos/HealthRegenToggle/Staging/Thunderstore/Mods' != ''">
+		<Copy SourceFiles="$(TargetPath)" DestinationFolder="$(HOME)/repos/HealthRegenToggle/Staging/Thunderstore/Mods"/>
 	</Target>	
 </Project>

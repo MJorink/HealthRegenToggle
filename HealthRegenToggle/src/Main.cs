@@ -4,13 +4,14 @@ using BoneLib.BoneMenu;
 using Il2CppSLZ.Marrow;
 using UnityEngine;
 
-[assembly: MelonInfo(typeof(HealthRegenToggle.Core), "HealthRegenToggle", "1.2.0", "jorink")]
-[assembly: MelonGame("Stress Level Zero", "BONELAB")]
-
 namespace HealthRegenToggle
 {
-    public class Core : MelonMod
+    public class HealthRegenToggleMod : MelonMod
     {
+    	public const string Title = "HealthRegenToggle";
+    	public const string Description = "A BoneLab mod that allows you to toggle health regeneration.";
+    	public const string Version = "1.2.0";
+
     	private static MelonPreferences_Entry<bool> regenEntry;
 
         private static Player_Health playerHealth;
