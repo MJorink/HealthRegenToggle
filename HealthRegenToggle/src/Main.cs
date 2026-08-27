@@ -32,7 +32,6 @@ namespace HealthRegenToggle
             regenEntry = category.CreateEntry("Health Regeneration", true);
             
             MelonPreferences.Save();
-            category.SaveToFile();
         }
 
         private void SetupBoneMenu()
