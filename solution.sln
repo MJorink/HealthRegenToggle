@@ -1,5 +1,5 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("HealthRegenToggle") = "HealthRegenToggle", "src/HealthRegenToggle.csproj", "HealthRegenToggle"
+Project("HealthRegenToggle") = "HealthRegenToggle", "HealthRegenToggle/HealthRegenToggle.csproj", "HealthRegenToggle"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

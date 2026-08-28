@@ -16,7 +16,7 @@ namespace HealthRegenToggle
 
         private static Player_Health playerHealth;
         private static RigManager rig;
-        private static Coroutine regenRoutine;
+        //private static Coroutine regenRoutine;
 
         public override void OnInitializeMelon()
         {
@@ -38,8 +38,8 @@ namespace HealthRegenToggle
         {
             Page defaultPage = Page.Root.CreatePage("Jorink", Color.red).CreatePage("HealthRegenToggle", Color.green);
 
-            defaultPage.CreateBool("Health Regeneration", Color.blue, regenEntry.Value, (value) => { regenEntry.Value = value; });
-            defaultPage.CreateFunction("Save Settings", Color.cyan, () => MelonPreferences.Save());
+            defaultPage.CreateBool("Health Regeneration", Color.green, regenEntry.Value, (value) => { regenEntry.Value = value; });
+            defaultPage.CreateFunction("Save Settings", Color.green, () => MelonPreferences.Save());
         }
 
         private static void SetupHooks()
@@ -51,21 +51,19 @@ namespace HealthRegenToggle
         {
         	rig = Player.RigManager;
         	playerHealth = rig.health.TryCast<Player_Health>();
-        	regenRoutine = playerHealth.regenRoutine;
+        	//regenRoutine = playerHealth.regenRoutine;
         }
 
         private static bool IsModAllowed()
         {
-        	if (!rig || !playerHealth) return false;
-        	
-        	if (!regenEntry.Value && playerHealth.regenerating && regenRoutine != null) return true;
-        	return false;
+        	if (!rig || !playerHealth || regenEntry.Value || !playerHealth.regenerating) return false;
+        	return true;
         }
 
         public override void OnUpdate()
         {
         	if (!IsModAllowed()) return;
-        	playerHealth.StopCoroutine(regenRoutine);
+        	//playerHealth.StopCoroutine(regenRoutine);
         	playerHealth.regenerating = false;
         }
     }
