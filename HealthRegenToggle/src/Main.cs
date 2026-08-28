@@ -16,7 +16,7 @@ namespace HealthRegenToggle
 
         private static Player_Health playerHealth;
         private static RigManager rig;
-        //private static Coroutine regenRoutine;
+        private static Coroutine regenRoutine;
 
         public override void OnInitializeMelon()
         {
@@ -51,19 +51,20 @@ namespace HealthRegenToggle
         {
         	rig = Player.RigManager;
         	playerHealth = rig.health.TryCast<Player_Health>();
-        	//regenRoutine = playerHealth.regenRoutine;
+        	regenRoutine = playerHealth.regenRoutine;
         }
 
         private static bool IsModAllowed()
         {
-        	if (!rig || !playerHealth || regenEntry.Value || !playerHealth.regenerating) return false;
+        	//if (!rig || !playerHealth || regenEntry.Value || !playerHealth.regenerating) return false;
+        	if (!rig || !playerHealth || regenEntry.Value) return false; // Check if this fixes the problem
         	return true;
         }
 
         public override void OnUpdate()
         {
         	if (!IsModAllowed()) return;
-        	//playerHealth.StopCoroutine(regenRoutine);
+        	playerHealth.StopCoroutine(regenRoutine);
         	playerHealth.regenerating = false;
         }
     }
