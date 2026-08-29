@@ -12,25 +12,24 @@ namespace HealthRegenToggle
     	public const string Description = "A BoneLab mod that allows you to toggle health regeneration.";
     	public const string Version = "1.2.0";
 
-    	private static MelonPreferences_Entry<bool> regenEntry;
+    	private static MelonPreferences_Entry<bool> enableRegen;
+    	private static MelonPreferences_Entry<bool> enableVignette;
 
         private static Player_Health playerHealth;
-        private static RigManager rig;
-        private static Coroutine regenRoutine;
 
         public override void OnInitializeMelon()
         {
             SetupMelonPreferences();
             SetupBoneMenu();
-            SetupHooks();
         }
 
         private void SetupMelonPreferences()
         {
             var category = MelonPreferences.CreateCategory("HealthRegenToggle");
             
-            regenEntry = category.CreateEntry("Health Regeneration", true);
-            
+            enableRegen = category.CreateEntry("Health Regeneration", true);
+            enableVignette = category.CreateEntry("Health Vignette", true);
+
             MelonPreferences.Save();
         }
 
@@ -38,37 +37,28 @@ namespace HealthRegenToggle
         {
             Page defaultPage = Page.Root.CreatePage("Jorink", Color.red).CreatePage("HealthRegenToggle", Color.green);
 
-            defaultPage.CreateBool("Health Regeneration", Color.green, regenEntry.Value, (value) => { regenEntry.Value = value; });
+            defaultPage.CreateBool("Health Regeneration", Color.yellow, enableRegen.Value, (value) => { enableRegen.Value = value; });
+            defaultPage.CreateBool("Health Vignette", Color.yellow, enableVignette.Value, (value) => { enableVignette.Value = value; });
             defaultPage.CreateFunction("Save Settings", Color.green, () => MelonPreferences.Save());
-        }
-
-        private static void SetupHooks()
-        {
-        	Hooking.OnLevelLoaded += OnLevelLoaded;
-        }
-
-        private static void OnLevelLoaded(LevelInfo levelInfo)
-        {
-        	rig = Player.RigManager;
-        	playerHealth = rig.health.TryCast<Player_Health>();
-        }
-
-        private static bool IsModAllowed()
-        {
-        	return rig && playerHealth && !regenEntry.Value;
         }
 
         public override void OnUpdate()
         {
-        	if (!IsModAllowed()) return;
-
-        	if (regenRoutine == null)
+        	if (!playerHealth)
         	{
-        		regenRoutine = playerHealth.regenRoutine;
-        		return; // Check again first in case it is still not available.
+        		playerHealth = Player.RigManager.health.TryCast<Player_Health>();
+        		return;
+        	}
+        	
+        	if (!enableRegen.Value && playerHealth.regenRoutine != null)
+        	{
+        		playerHealth.StopCoroutine(playerHealth.regenRoutine);
         	}
 
-        	playerHealth.StopCoroutine(regenRoutine);
+        	if (!enableVignette.Value && playerHealth.vignetteRoutine != null)
+        	{
+        		playerHealth.StopCoroutine(playerHealth.vignetteRoutine);
+        	}
         }
     }
 }
