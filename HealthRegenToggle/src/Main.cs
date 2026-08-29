@@ -55,18 +55,19 @@ namespace HealthRegenToggle
 
         private static bool IsModAllowed()
         {
-        	if (regenRoutine == null)
-        	{
-        		regenRoutine = playerHealth.regenRoutine;
-        		return false; // Check again first in case it is still not available.
-        	}
-
         	return rig && playerHealth && !regenEntry.Value;
         }
 
         public override void OnUpdate()
         {
         	if (!IsModAllowed()) return;
+
+        	if (regenRoutine == null)
+        	{
+        		regenRoutine = playerHealth.regenRoutine;
+        		return; // Check again first in case it is still not available.
+        	}
+
         	playerHealth.StopCoroutine(regenRoutine);
         }
     }
