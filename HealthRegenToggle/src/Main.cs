@@ -51,21 +51,23 @@ namespace HealthRegenToggle
         {
         	rig = Player.RigManager;
         	playerHealth = rig.health.TryCast<Player_Health>();
-        	regenRoutine = playerHealth.regenRoutine;
         }
 
         private static bool IsModAllowed()
         {
-        	//if (!rig || !playerHealth || regenEntry.Value || !playerHealth.regenerating) return false;
-        	if (!rig || !playerHealth || regenEntry.Value) return false; // Check if this fixes the problem
-        	return true;
+        	if (regenRoutine == null)
+        	{
+        		regenRoutine = playerHealth.regenRoutine;
+        		return false; // Check again first in case it is still not available.
+        	}
+
+        	return rig && playerHealth && !regenEntry.Value;
         }
 
         public override void OnUpdate()
         {
         	if (!IsModAllowed()) return;
         	playerHealth.StopCoroutine(regenRoutine);
-        	playerHealth.regenerating = false;
         }
     }
 }
