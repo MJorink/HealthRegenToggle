@@ -1,3 +1,6 @@
+**v1.3.0**
+- Rewrite with JLib
+
 **v1.2.0**
 - Code Refresh
 

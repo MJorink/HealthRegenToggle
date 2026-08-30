@@ -1,10 +1,5 @@
 # HealthRegenToggle
-A BoneLab mod that allows you to toggle health regeneration. <br>
-Last tested on `Patch 6` <br>
-
-## Settings
-Health Regeneration: <br>
-Enable/Disable Health Regeneration <br>
+A BoneLab mod that allows you to toggle health regeneration.
 
 ## Discord Server
 Join the Discord server to chat, give suggestions, report issues, and get sneak peeks! <br>

@@ -1,9 +1,10 @@
 {
     "name": "HealthRegenToggle",
-    "version_number": "1.2.0",
+    "version_number": "1.3.0",
     "website_url": "https://github.com/MJorink/HealthRegenToggle",
     "description": "A BoneLab mod that allows you to toggle health regeneration.",
     "dependencies": [
-        "bonelib-BoneLib-3.2.2"
+        "bonelib-BoneLib-3.2.2",
+        "Jorink-JLib-1.0.0"
     ]
 }
