@@ -31,16 +31,17 @@ namespace HealthRegenToggle
 
 		public override void OnUpdate()
 		{
-			if (JLib.playerHealth == null) return;
+			var playerHealth = JLib.playerHealth;
+			if (playerHealth == null) return;
 
-			if (!enableRegen.Value && JLib.playerHealth.regenRoutine != null)
+			if (!enableRegen.Value && playerHealth.regenRoutine != null)
 			{
-				JLib.playerHealth.StopCoroutine(JLib.playerHealth.regenRoutine);
+				playerHealth.StopCoroutine(playerHealth.regenRoutine);
 			}
 
-			if (!enableVignette.Value && JLib.playerHealth.vignetteRoutine != null)
+			if (!enableVignette.Value && playerHealth.vignetteRoutine != null)
 			{
-				JLib.playerHealth.StopCoroutine(JLib.playerHealth.vignetteRoutine);
+				playerHealth.StopCoroutine(playerHealth.vignetteRoutine);
 			}
 		}
 	}
