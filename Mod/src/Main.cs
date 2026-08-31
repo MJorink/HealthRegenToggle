@@ -2,9 +2,9 @@ using MelonLoader;
 using UnityEngine;
 using jlib;
 
-namespace HealthRegenToggle
+namespace healthregentoggle
 {
-	public class HRT : MelonMod
+	public class HealthRegenToggle : MelonMod
 	{
 		public const string Version = "1.3.0";
 		
@@ -13,20 +13,10 @@ namespace HealthRegenToggle
 		
 		public override void OnInitializeMelon()
 		{
-			// MelonPreferences
-			var category = MelonPreferences.CreateCategory("HealthRegenToggle");
-			category.SetFilePath("Jorink/HealthRegenToggle.cfg");
-			
-			enableRegen = category.CreateEntry<bool>("Enable Regeneration", true);
-			enableVignette = category.CreateEntry<bool>("Enable Damage Vignette", true);
-			
-			category.SaveToFile();
+			var menu = JLib.Register("HealthRegenToggle", Color.green);
 
-			// BoneMenu Page
-			var modPage = JLib.rootPage.CreatePage("HealthRegenToggle", Color.green);
-			
-			modPage.CreateBool("Health Regeneration", Color.yellow, enableRegen.Value, (value) => { enableRegen.Value = value; });
-			modPage.CreateBool("Damage Vignette", Color.yellow, enableVignette.Value, (value) => { enableVignette.Value = value; });
+			enableRegen = menu.Bool("Enable Regeneration", true, Color.yellow);
+			enableVignette = menu.Bool("Enable Damage Vignette", true, Color.yellow);
 		}
 
 		public override void OnUpdate()
