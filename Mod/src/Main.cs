@@ -8,8 +8,8 @@ namespace healthregentoggle
 	{
 		public const string Version = "1.3.0";
 		
-		private static MelonPreferences_Entry<bool> enableRegen;
-		private static MelonPreferences_Entry<bool> enableVignette;
+		private MelonPreferences_Entry<bool> enableRegen;
+		private MelonPreferences_Entry<bool> enableVignette;
 		
 		public override void OnInitializeMelon()
 		{
