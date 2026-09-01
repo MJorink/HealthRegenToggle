@@ -29,9 +29,9 @@ namespace healthregentoggle
 				playerHealth.StopCoroutine(playerHealth.regenRoutine);
 			}
 
-			if (!enableVignette.Value && playerHealth.vignetteRoutine != null)
+			if (!enableVignette.Value && playerHealth.vigRend != null)
 			{
-				playerHealth.StopCoroutine(playerHealth.vignetteRoutine);
+				playerHealth.vigRend.enabled = !playerHealth.alive; // Enable vignette on death to fix respawning
 			}
 		}
 	}
