@@ -6,7 +6,7 @@ namespace healthregentoggle
 {
 	public class HealthRegenToggle : MelonMod
 	{
-		public const string Version = "1.3.0";
+		public const string Version = "2.0.0";
 		
 		private MelonPreferences_Entry<bool> enableRegen;
 		private MelonPreferences_Entry<bool> enableVignette;

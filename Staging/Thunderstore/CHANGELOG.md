@@ -1,5 +1,6 @@
-**v1.3.0**
+**v2.0.0**
 - Rewrite with JLib
+- Added damage vignette toggle
 
 **v1.2.0**
 - Code Refresh
